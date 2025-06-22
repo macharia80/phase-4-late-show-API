@@ -52,3 +52,40 @@ def get_episode(episode_id):
 @api_bp.route('/episodes/random', methods=['GET'])
 def random_episode():
     return jsonify(random.choice(sample_episodes))
+from flask import Blueprint, jsonify
+
+api_bp = Blueprint('api', __name__)
+
+@api_bp.route('/test', methods=['GET'])
+def test_route():
+    return jsonify({
+        "status": "success",
+        "message": "API is working!",
+        "endpoints": [
+            "/api/test",
+            "/api/episodes",
+            "/api/episodes/<id>"
+        ]
+    })
+
+@api_bp.route('/episodes', methods=['GET'])
+def get_episodes():
+    return jsonify({
+        "data": [
+            {
+                "id": 1,
+                "title": "Sample Episode",
+                "date": "2023-01-01"
+            }
+        ]
+    })
+
+@api_bp.route('/<path:undefined>')
+def catch_all(undefined):
+    return jsonify({
+        "error": "Route not found",
+        "available_routes": [
+            "/api/test",
+            "/api/episodes"
+        ]
+    }), 404
