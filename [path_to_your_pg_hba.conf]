@@ -1,0 +1,4 @@
+# Allow macharia to connect locally with password
+local   late_show_db    macharia                                md5
+host    late_show_db    macharia    127.0.0.1/32           md5
+host    late_show_db    macharia    ::1/128                md5
