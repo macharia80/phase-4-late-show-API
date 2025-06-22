@@ -89,3 +89,13 @@ def catch_all(undefined):
             "/api/episodes"
         ]
     }), 404
+@api_bp.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "message": "Welcome to the Late Show API",
+        "endpoints": {
+            "test": "/api/test",
+            "episodes": "/api/episodes",
+            "random_episode": "/api/episodes/random"
+        }
+    })

@@ -6,7 +6,10 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 def create_app():
+    """Application factory pattern"""
     app = Flask(__name__)
+    
+    # Load configuration
     app.config.from_object('server.config.Config')
     
     # Initialize extensions
@@ -15,6 +18,6 @@ def create_app():
     
     # Import and register blueprints
     from server.routes import api_bp
-    app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(api_bp)
     
     return app
